@@ -4,22 +4,21 @@
     $_DATA = (object) [
         "accept" => apache_request_headers()["accept"]
     ];
-    if($_DATA->accept == "CrearMenu"){
-        $_DATA->plantilla = <<<HTML
+    $_DATA->plantilla = match($_DATA->accept){
+        "CrearMenu" => <<<HTML
             <ul>
                 <li><a href="">a</a></li>
                 <li><a href="">b</a></li>
                 <li><a href="">c</a></li>
                 <li><a href="">d</a></li>
             </ul>
-        HTML;
-    }
-    else if($_DATA->accept == "CrearSection"){
-        $_DATA->plantilla = <<<TEXTO
-            Miguel amet consectetur adipisicing elit. Earum maiores, odit, obcaecati illo ab alias aperiam inventore sed reprehenderit non iusto odio perferendis qui possimus quas reiciendis rem delectus ipsam!
-        TEXTO;
-    };
-    
+        HTML,
+        "CrearSection" => <<<TEXTO
+            uuuuui amet consectetur adipisicing elit. Earum maiores, odit, obcaecati illo ab alias aperiam inventore sed reprehenderit non iusto odio perferendis qui possimus quas reiciendis rem delectus ipsam!
+        TEXTO,
 
+
+        default => null
+    };
     echo json_encode($_DATA->plantilla, JSON_PRETTY_PRINT);
 ?> 
